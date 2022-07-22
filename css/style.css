@@ -7,7 +7,7 @@
 }
 body{
     margin: 0;
-    margin-bottom: 1000px;
+    margin-bottom: 8000px;
 }
 
 /* --- ZOOMOUT START --- */
@@ -98,15 +98,81 @@ body{
     width: 100%;
     height: 100vh;
     display: flex;
-
+    padding-top: 200px;
 }
 .stepsscroll__wrapper{
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+.stepsscroll__intro{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+}
+.stepsscroll__step{
+    position: absolute;
+    top:0;
+    left:0;
+    opacity:0;
 }
 
+
+/* .a-appear-and-bottom{
+    animation-name: appear-and-bottom;
+    animation-duration: 4.5s;
+    animation-fill-mode: both;
+} */
+
+/* @keyframes appear-and-bottom{
+    0%{
+        opacity:0;
+        top:0;
+    }
+    25%{
+        opacity:1;
+        top:0;
+    }
+    50%{
+        opacity:1;
+        top:0;
+    }
+    100%{
+        opacity:1;
+        top:calc( 80%);
+    }
+} */
+
+.a-appear{
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+@keyframes appear{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+
+.a-to-bottom{
+    animation-name: to-bottom;
+    animation-duration: 3.5s;
+    animation-fill-mode: both;
+}
+@keyframes to-bottom{
+    0%{
+        top:0;
+    }
+    100%{
+        opacity:80%;
+    }
+}
 
 
 /* --- STEPSSCROLL END --- */

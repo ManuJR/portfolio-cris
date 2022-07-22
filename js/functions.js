@@ -5,6 +5,8 @@ $(document).ready(function(){
     zoomOut("#zoomout_1",true, "appear")
     zoomOut("#zoomout_2",true, "appear")
 
+    stepsScroll( "#stepsscroll_1" )
+
    
 })
 
@@ -23,9 +25,9 @@ function zoomOut(id_elem, elem_animate=false, class_animate=null){
     }
 
     let offsetTopElem = $(id_elem+" #zoomout__scrollnext").offset().top;
+    let distElement = $(id_elem).offset().top;
     $(window).scroll(function(){
         let scroll = $(window).scrollTop();
-        let distElement = $(id_elem).offset().top;
         let scrollElement = scroll - distElement;
         if( scroll >= distElement){
             let scalemax = initalScale - (scrollElement / 1000)
@@ -43,4 +45,36 @@ function zoomOut(id_elem, elem_animate=false, class_animate=null){
             }
         }
     })
+}
+
+
+function stepsScroll(id){
+    let elem = $(id);
+    let order = 0;
+    if( elem.length !=1 ){
+        return;
+    }
+    let distElement = $(id).offset().top;
+    $(window).bind('mousewheel', function(e){
+        let scroll = $(window).scrollTop();
+        let windowWidth = $(window).width();
+        let windowHeight = $(window).width();
+        let scrollElement = scroll - distElement;
+        console.log(scroll);
+        console.log(distElement);
+        
+        if( scrollElement >= 0 && scrollElement <= windowHeight){
+            // $(window).scroll().disable();
+            if(e.originalEvent.wheelDelta /120 > 0) {
+                console.log('scrolling up !');
+                console.log(order--);
+                
+            }
+            else{
+                console.log(order++);
+                console.log('scrolling down !');
+            }
+        }
+    });
+
 }
