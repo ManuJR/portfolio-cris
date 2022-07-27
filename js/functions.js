@@ -48,9 +48,14 @@ function zoomOut(id_elem, elem_animate=false, class_animate=null){
 }
 
 
+
+let animations = [
+    "a-appear", "a-to-bottom"
+]
 function stepsScroll(id){
     let elem = $(id);
     let order = 0;
+    let n_steps = 8;
     if( elem.length !=1 ){
         return;
     }
@@ -60,21 +65,32 @@ function stepsScroll(id){
         let windowWidth = $(window).width();
         let windowHeight = $(window).width();
         let scrollElement = scroll - distElement;
-        console.log(scroll);
-        console.log(distElement);
         
         if( scrollElement >= 0 && scrollElement <= windowHeight){
-            // $(window).scroll().disable();
             if(e.originalEvent.wheelDelta /120 > 0) {
                 console.log('scrolling up !');
-                console.log(order--);
+                removeStep(order, animations[order-1]);
+                order = order>0 ? order-1 : 0;
+                console.log(order);
                 
             }
             else{
-                console.log(order++);
                 console.log('scrolling down !');
+                order = order<n_steps ? order+1 :n_steps;
+                console.log(order);
+                addStep(order, animations[order]);
+    
+                
+
             }
         }
     });
+}
 
+function addStep(n, a_class){
+    $(".step_"+n).addClass(a_class);
+}
+
+function removeStep(n, a_class){
+    $(".step_"+n).removeClass(a_class);
 }
