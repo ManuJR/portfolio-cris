@@ -10,7 +10,8 @@ $(document).ready(function(){
     zoomIn("#zoomin_1", true)
 
     copy("#app_cromatica")
-   
+    
+    scrollLateral("#app_style");
 })
 
 
@@ -146,10 +147,9 @@ function copy(id_elem){
     if( elem.length !=1 ){
         return;
     }
-    let windowWidth = $(window).width();
-    let windowHeight = $(window).width();
 
     let distElement = $(id_elem).offset().top;
+
     let child_2 =  $(".stepscopys__copy-card:nth-child(2)");
     let child_3 =  $(".stepscopys__copy-card:nth-child(3)");
     let child_4 =  $(".stepscopys__copy-card:nth-child(4)");
@@ -163,9 +163,6 @@ function copy(id_elem){
         if( scrollElement >= 0){
             let mov_2 = getPosX_2 + scrollElement/3 < 0 ? getPosX_2 + scrollElement/3 : 0;
             let op_2 = 0+(getPosX_2 + scrollElement/3)/10;
-
-            console.log("mov_2");
-            console.log(0+(getPosX_2 + scrollElement/3)/1000);
             let mov_3 = getPosX_3 + scrollElement/3 < 0 ? getPosX_3 + scrollElement/3 : 0;
             let mov_4 = getPosX_4 + scrollElement/3 < 0 ? getPosX_4 + scrollElement/3 : 0;
             child_2.css({"left": mov_2+"px"})
@@ -178,3 +175,36 @@ function copy(id_elem){
 }
 
 
+function scrollLateral(id_elem){
+    let elem = $(id_elem);
+    if( elem.length !=1 ){
+        return;
+    }
+    let distElement = elem.offset().top;
+    
+    $(window).scroll(function(){
+        let scroll = $(window).scrollTop();
+        console.log("scroll");
+        console.log(scroll);
+        let scrollElement =  scroll - distElement;  
+        if( scrollElement>=0 ){
+            console.log("scrollElement");
+            console.log(scrollElement);
+           $(id_elem+" .latscroll-slide").css({"transform": "translateX("+(-scrollElement)+"px)"})
+           
+
+        };
+    });
+}
+
+
+function elemenIsOnView(id, px=0){
+    let scroll = $(window).scrollTop();
+    let distElement = $(id).offset().top;
+    let scrollElement =  scroll - distElement;   
+    if( scrollElement >= px){
+        console.log("----")
+        return scrollElement;
+    }
+    return false;
+}

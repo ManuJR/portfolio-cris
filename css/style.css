@@ -316,3 +316,40 @@ body{
     /* transform: translateX(-810px); */
 }
 
+
+
+/* SCROLL LATERAL START  */
+
+.lateralscroll{
+    
+}
+.latscroll-wrapper{
+    width: 100%;
+    height: 300vw;
+}
+.latscroll-sticky{
+    position: sticky;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+.latscroll-wrapper-slide{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.latscroll-slide{
+    width: 300vw;
+    height: 100%;
+    display: flex;
+}
+.latscroll-slide__n1, .latscroll-slide__n2, .latscroll-slide__n3{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* SCROLL LATERAL END  */
