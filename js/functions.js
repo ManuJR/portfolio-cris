@@ -7,8 +7,12 @@ $(document).ready(function(){
 
     stepsScroll( "#stepsscroll_1" )
 
+    zoomIn("#zoomin_1", true)
+
+    copy("#app_cromatica")
    
 })
+
 
 function zoomOut(id_elem, elem_animate=false, class_animate=null){
     let elem = $(id_elem);
@@ -94,3 +98,83 @@ function addStep(n, a_class){
 function removeStep(n, a_class){
     $(".step_"+n).removeClass(a_class);
 }
+
+function zoomIn(id_elem , next_text){
+    let elem = $(id_elem);
+    if( elem.length !=1 ){
+        return;
+    }
+    let initalScale = 1;
+    let maximumScale = 5;
+    let windowWidth = $(window).width();
+    let windowHeight = $(window).width();
+    let px_salida = 2*windowHeight/3;
+
+    let distElement = $(id_elem).offset().top;
+    $(window).scroll(function(){
+        let scroll = $(window).scrollTop();
+        let scrollElement =  scroll - distElement;
+        if( scrollElement >= 0){
+            let scalemax = initalScale + (scrollElement * 0.001)
+            if (scalemax > maximumScale) {
+                scalemax = maximumScale
+            }
+            $(id_elem+" .zoomin__background").css({"transform": "scale("+scalemax+")"})
+        }
+        if(!next_text){
+            return
+        }
+        let ini = scrollElement - px_salida;
+        let opacity = 0 + ini*0.001;
+        let posx = 0 + ini*0.1;
+        if(opacity >= 1 ){
+            opacity = 1;
+        }else if(opacity <=0 ){
+            opacity = 0;
+
+        }
+        if( scrollElement>= px_salida){
+            $(id_elem+" .zoomin__next").css({"opacity": opacity})
+            $(id_elem+" .zoomin__next").css({"transform": "translateY("+posx+"px)"})
+        }
+    })
+}
+
+
+function copy(id_elem){
+    let elem = $(id_elem);
+    if( elem.length !=1 ){
+        return;
+    }
+    let windowWidth = $(window).width();
+    let windowHeight = $(window).width();
+
+    let distElement = $(id_elem).offset().top;
+    let child_2 =  $(".stepscopys__copy-card:nth-child(2)");
+    let child_3 =  $(".stepscopys__copy-card:nth-child(3)");
+    let child_4 =  $(".stepscopys__copy-card:nth-child(4)");
+    let getPosX_2 =  parseInt(child_2.css("left").replace("px", ""));
+    let getPosX_3 =  parseInt(child_3.css("left").replace("px", ""));
+    let getPosX_4 =  parseInt(child_4.css("left").replace("px", ""));
+
+    $(window).scroll(function(){
+        let scroll = $(window).scrollTop();
+        let scrollElement =  scroll - distElement;   
+        if( scrollElement >= 0){
+            let mov_2 = getPosX_2 + scrollElement/3 < 0 ? getPosX_2 + scrollElement/3 : 0;
+            let op_2 = 0+(getPosX_2 + scrollElement/3)/10;
+
+            console.log("mov_2");
+            console.log(0+(getPosX_2 + scrollElement/3)/1000);
+            let mov_3 = getPosX_3 + scrollElement/3 < 0 ? getPosX_3 + scrollElement/3 : 0;
+            let mov_4 = getPosX_4 + scrollElement/3 < 0 ? getPosX_4 + scrollElement/3 : 0;
+            child_2.css({"left": mov_2+"px"})
+            child_3.css({"left": mov_3+"px"})
+            child_4.css({"left": mov_4+"px"})
+           
+
+        };
+    });
+}
+
+

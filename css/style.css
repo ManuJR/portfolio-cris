@@ -8,6 +8,7 @@
 body{
     margin: 0;
     margin-bottom: 8000px;
+    font-family: 'Roboto';
 }
 
 /* --- ZOOMOUT START --- */
@@ -212,14 +213,23 @@ body{
     width: 100%;
     height: 400vh;
 } 
-.zoomin__background{
+.zoomin__sticky{
     width: 100%;
     height: 100vh;
+    position:sticky;
+    top: 0;
+}
+.zoomin_wrapper{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.zoomin__background{
+    width: 100%;
+    height: 100%;
     background-image: url(../imgs/mockup-rubrika-web-2.jpg);
     background-size: contain;
     background-position: center;
-    position:sticky;
-    top: 0;
     transform: scale(1);
     transform-origin: left;
 }
@@ -227,5 +237,82 @@ body{
 .zoomin__background-end{
     transform: scale(8);
 }
+.zoomin__next{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+}
 
 /* --- ZOOMIN END --- */
+.steps-copys__container{
+    width: 100%;
+   
+}
+.stepscopys__wrapper{
+    height: 500vh;
+    width: 100%;
+}
+.stepscopys__sticky{
+    position: sticky;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+}
+.stepscopys__container{
+    width: 100%;
+    height: 100%;
+    background-color: #e7e7e7;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.stepscopys__cont-copys{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1100px;
+}
+.stepscopys__copy-card{
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    position: relative;
+    z-index:5;
+    opacity: 1;
+}
+.stepscopys__copy-card:nth-child(1){
+    opacity: 1;
+}
+.stepscopys__copy-card:nth-child(2){
+    left: calc( -250px - 20px) ;
+    /* transform: translateX( calc( -100% - 20px) ); */
+    z-index:4;    
+    /* transform: translateX(-270px); */
+}
+.stepscopys__copy-card:nth-child(3){
+    left: calc( -500px - 40px);
+
+    /* transform: translateX( calc( -200% - 40px) ); */
+    z-index:3;
+    /* transform: translateX(-540px); */
+}
+.stepscopys__copy-card:nth-child(4){
+    left: calc( -750px - 60px);
+
+    /* transform: translateX( calc( -300% - 60px) ); */
+    z-index:2;
+
+    /* transform: translateX(-810px); */
+}
+
