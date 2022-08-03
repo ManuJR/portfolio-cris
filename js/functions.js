@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
 
+
     zoomOut("#zoomout_1",true, "appear")
     zoomOut("#zoomout_2",true, "appear")
 
@@ -12,6 +13,9 @@ $(document).ready(function(){
     copy("#app_cromatica")
     
     scrollLateral("#app_style");
+    addAnimation("#app_style_icons");
+
+
 })
 
 
@@ -181,19 +185,46 @@ function scrollLateral(id_elem){
         return;
     }
     let distElement = elem.offset().top;
+    let windWidth = $(".latscroll-slide__n1").width();
     
     $(window).scroll(function(){
         let scroll = $(window).scrollTop();
         console.log("scroll");
         console.log(scroll);
         let scrollElement =  scroll - distElement;  
-        if( scrollElement>=0 ){
+        if( scrollElement>=0 && scrollElement<2*windWidth){
             console.log("scrollElement");
             console.log(scrollElement);
            $(id_elem+" .latscroll-slide").css({"transform": "translateX("+(-scrollElement)+"px)"})
-           
+        }else if(scrollElement>2*windWidth){
+           $(id_elem+" .latscroll-slide").css({"transform": "translateX("+(-2*windWidth)+"px)"})
 
-        };
+        }else if(scrollElement<0){
+            $(id_elem+" .latscroll-slide").css({"transform": "translateX("+0+"px)"})
+        }
+        ;
+    });
+}
+
+function addAnimation( id_elem ){
+    let elem = $(id_elem);
+    if( elem.length !=1 ){
+        return;
+    }
+    let windWidth = $(window).width();
+
+    let distElement = elem.offset().top;
+    
+    $(window).scroll(function(){
+        let scroll = $(window).scrollTop();
+        let scrollElement =  scroll - distElement +2*windWidth/3;  
+        
+        if(scrollElement>=0){
+            $(id_elem).addClass("a-appear-draw")
+        }else{
+            $(id_elem).removeClass("a-appear-draw")
+        }
+    
     });
 }
 
@@ -208,3 +239,6 @@ function elemenIsOnView(id, px=0){
     }
     return false;
 }
+
+
+
