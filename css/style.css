@@ -9,10 +9,41 @@
 }
 body{
     margin: 0;
-    margin-bottom: 8000px;
     font-family: 'Roboto';
 }
 
+nav{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    height: 80px;
+}
+
+/* INDEX */
+.porfolios{
+    display: flex;
+    justify-content: center;
+}
+.porfolios__single{
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-grey);
+    cursor: pointer;
+    position: relative;
+}
+.porfolios__circle{
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 /* --- ZOOMOUT START --- */
 .zoomout{
     position: relative;
@@ -99,7 +130,7 @@ body{
 /* --- STEPSSCROLL START --- */
 .stepsscroll{
     width: 100%;
-    height: 700vh;
+    height: 400vh;
     display: flex;
 }
 .stepsscroll__wrapper{
@@ -461,12 +492,13 @@ body{
     font-weight: bold;
 }
 .transformscroll__spancolor{
-    color: var(--orange-rubrika)
+    /* color: var(--orange-rubrika) */
 }
 .logo_pieces{
     display: flex;
     flex-direction: row;
     padding: 0 10%;
+    width: 100%;
 }
 .logo_piece{
     display: flex;
@@ -527,28 +559,30 @@ body{
 }
 
 
-.scroll-text{
+.text-paint{
     -webkit-text-fill-color: transparent;
-    /* background: linear-gradient(0deg , orange 10px , black 10px); */
     -webkit-background-clip: text;
-    animation: paint 1s 0.5s both;
-
-
-
     background-image: linear-gradient( 360deg, black 50%, orange 50%);
     background-size: 100% 200%;
-    background-position: left top;
-
+    background-position: left 100%;
+}
+.a-appear-draw{
+    animation: paint 1s 0.5s both;
 }
 
 @keyframes paint{
     0%{
-        /* background: linear-gradient(0deg , orange 0px , black 10px); */
-        background-position: left bottom;
+        background-position: left 100%;
     }
     100%{
-        background-position: left top;
-        /* background: linear-gradient(0deg , orange 50px , black 10px); */
-
+        background-position: left 0;
     }
+}
+
+
+
+footer{
+    height: 500px;
+    background-color: #333;
+    width:100%;
 }

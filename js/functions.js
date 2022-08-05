@@ -1,6 +1,30 @@
 
 $(document).ready(function(){
 
+    $(".linktopage").mousemove(function(e){
+        console.log(e)
+        // $(this).css({"cursor":"none"})
+        let mouse = $(this).children(".porfolios__circle");
+        mouse.css(
+            {
+            "opacity": "1",
+            "left":e.offsetX+"px",
+            "top":e.offsetY+"px"
+        })
+    });
+
+    $(".linktopage").click(function(e){
+        e.preventDefault();
+        let href = $(this).attr("href");
+
+        // Animacion 
+        setTimeout(() => {
+
+            window.location.href = href;
+        }, 3000);
+        // Ir a pagina
+
+    });
 
 
     zoomOut("#zoomout_1",true, "appear")
@@ -13,7 +37,7 @@ $(document).ready(function(){
     copy("#app_cromatica")
     
     scrollLateral("#app_style");
-    addAnimation("#app_style_icons");
+    addAnimationPaintScroll(".text-paint");
 
 
 })
@@ -77,19 +101,13 @@ function stepsScroll(id){
         
         if( scrollElement >= 0 && scrollElement <= windowHeight){
             if(e.originalEvent.wheelDelta /120 > 0) {
-                console.log('scrolling up !');
                 removeStep(order, animations[order-1]);
                 order = order>0 ? order-1 : 0;
-                console.log(order);
                 
             }
             else{
-                console.log('scrolling down !');
                 order = order<n_steps ? order+1 :n_steps;
-                console.log(order);
                 addStep(order, animations[order]);
-    
-                
 
             }
         }
@@ -189,12 +207,9 @@ function scrollLateral(id_elem){
     
     $(window).scroll(function(){
         let scroll = $(window).scrollTop();
-        console.log("scroll");
-        console.log(scroll);
+
         let scrollElement =  scroll - distElement;  
         if( scrollElement>=0 && scrollElement<2*windWidth){
-            console.log("scrollElement");
-            console.log(scrollElement);
            $(id_elem+" .latscroll-slide").css({"transform": "translateX("+(-scrollElement)+"px)"})
         }else if(scrollElement>2*windWidth){
            $(id_elem+" .latscroll-slide").css({"transform": "translateX("+(-2*windWidth)+"px)"})
@@ -206,35 +221,43 @@ function scrollLateral(id_elem){
     });
 }
 
-function addAnimation( id_elem ){
-    let elem = $(id_elem);
-    if( elem.length !=1 ){
-        return;
-    }
-    let windWidth = $(window).width();
-
-    let distElement = elem.offset().top;
+function addAnimationPaintScroll( elements ){
+    let elems = $(elements);
+    if( elems.length <1 ) return; 
+    let movepaint = 100;
     
+    let winHeight = $(window).height();
     $(window).scroll(function(){
-        let scroll = $(window).scrollTop();
-        let scrollElement =  scroll - distElement +2*windWidth/3;  
-        
-        if(scrollElement>=0){
-            $(id_elem).addClass("a-appear-draw")
-        }else{
-            $(id_elem).removeClass("a-appear-draw")
-        }
-    
+        elems.each( function(){
+            let scrollElement = elemenIsOnView(this, 2*winHeight/3);
+            movepaint = 100 - scrollElement/4;
+            if( movepaint<0 ){
+                movepaint = 0;
+            }else if( movepaint>100 ){
+                movepaint = 100;
+            }
+            console.log("scrollElement")
+            console.log(movepaint)
+            if( scrollElement ){
+                $(this).css({
+                    "background-position": "left "+movepaint+"%"
+                })
+               // $(this).addClass("a-appear-draw")
+            }else{
+                $(this).removeClass("a-appear-draw")
+            }
+        })
     });
 }
 
 
-function elemenIsOnView(id, px=0){
+function elemenIsOnView(id, offset=0){
     let scroll = $(window).scrollTop();
     let distElement = $(id).offset().top;
-    let scrollElement =  scroll - distElement;   
-    if( scrollElement >= px){
+    let scrollElement =  scroll - distElement + offset;   
+    if( scrollElement >= 0){
         console.log("----")
+        console.log(scrollElement)
         return scrollElement;
     }
     return false;
