@@ -4,22 +4,38 @@ $(document).ready(function(){
     $(".linktopage").mousemove(function(e){
         console.log(e)
         // $(this).css({"cursor":"none"})
-        let mouse = $(this).children(".porfolios__circle");
+       // let mouse = $(this).children(".porfolios__circle");
+        let elem_relative = $(".porfolios__single").offset();
+        let mouse = $(".porfolios__circle");
+        // mouse.css(
+        //     {
+        //     "opacity": "1",
+        //     "left":e.pageX-elem_relative.left-25+"px",
+        //     "top":e.pageY-elem_relative.top-25+"px"
+        // })
         mouse.css(
             {
             "opacity": "1",
-            "left":e.offsetX+"px",
-            "top":e.offsetY+"px"
+            "left":e.offsetX-25+"px",
+            "top":e.offsetY-25+"px"
         })
     });
-
+ 
     $(".linktopage").click(function(e){
         e.preventDefault();
         let href = $(this).attr("href");
+        let mouse = $(".porfolios__circle");
 
+       
+        mouse.css(
+            {
+            "opacity": "1",
+            "left":e.offsetX-25+"px",
+            "transform": "scale(50)"
+        })
         // Animacion 
         setTimeout(() => {
-
+            
             window.location.href = href;
         }, 3000);
         // Ir a pagina
